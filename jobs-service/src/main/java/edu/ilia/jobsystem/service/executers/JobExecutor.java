@@ -17,15 +17,15 @@ public interface JobExecutor {
         String name;
         Component componentAnnotation = this.getClass().getAnnotation(Component.class);
         if(componentAnnotation != null && !componentAnnotation.value().isEmpty()){
-            name = componentAnnotation.value();
+            name = componentAnnotation.value().toLowerCase();
         }else{
-            name = this.getClass().getSimpleName().replace(this.getClass().getSuperclass().getSimpleName(),"");
+            name = this.getClass().getSimpleName().replace(this.getClass().getSuperclass().getSimpleName() + "Impl","").toLowerCase();
         }
 
         return name;
     }
 
     default void cleanup(){
-        LoggerFactory.getLogger(this.getClass()).info("no cleanup configured for {}", this.getClass().getSimpleName());
+        LoggerFactory.getLogger(this.getClass()).info("no cleanup configured for {} job executor", getName());
     }
 }

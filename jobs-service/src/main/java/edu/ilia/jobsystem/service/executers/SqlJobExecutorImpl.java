@@ -8,15 +8,20 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author ilia.tankelevich
- * @date 21/02/2020
+ * @date 22/02/2020
  */
-
-@Component("sms")
-public class SmsJobExecutor implements JobExecutor {
+@Component("sql")
+public class SqlJobExecutorImpl implements JobExecutor {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @Override
     public JobServiceResponse execute(Job job) {
-        log.info("job " + job.getId() + " executed");
+        log.info("running job " + job.getId() + " with " + getName() + " executor");
         return job;
+    }
+
+    @Override
+    public void cleanup() {
+        log.info("custom cleanup for SQL job handler performed");
     }
 }

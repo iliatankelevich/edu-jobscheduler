@@ -4,7 +4,7 @@ package edu.ilia.jobssystem.models;
  * @author ilia.tankelevich
  * @date 21/02/2020
  */
-public enum ExecutionTime {
+public enum ExecutionMode {
     NOW,
     EVERY_HOUR,
     EVERY_2_HOURS,
