@@ -16,5 +16,4 @@ public class Job extends JobServiceResponse {
     private String status;
     @JsonProperty("execution_mode")
     private ExecutionMode executionMode;
-    private String time;
 }

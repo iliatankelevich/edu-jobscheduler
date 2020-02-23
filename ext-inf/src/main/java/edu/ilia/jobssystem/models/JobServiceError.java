@@ -7,8 +7,13 @@ import lombok.Getter;
  * @author ilia.tankelevich
  * @date 21/02/2020
  */
-@AllArgsConstructor
+
 @Getter
 public class JobServiceError extends JobServiceResponse {
+    public JobServiceError(int id, String message) {
+        this.message = message;
+        this.setId(id);
+    }
+
     private String message;
 }

@@ -92,7 +92,7 @@ public class JobsJdbcDaoImpl implements JobsDao {
         if(jobs.size() == 1){
             response = jobs.get(0);
         }else{
-            response = new JobServiceError("no job found for id " + jobId);
+            response = new JobServiceError(jobId, "no job found for id " + jobId);
         }
 
         return response;
@@ -112,7 +112,7 @@ public class JobsJdbcDaoImpl implements JobsDao {
         if(jobs.size() < jobIds.size()){
             jobIds.forEach(jobId -> {
                 if(!jobs.containsKey(jobId)){
-                    jobs.put(jobId, new JobServiceError("no job found for id " + jobId));
+                    jobs.put(jobId, new JobServiceError(jobId, "no job found for id " + jobId));
                 }
             });
         }

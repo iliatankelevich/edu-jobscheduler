@@ -19,7 +19,7 @@ public class SqlQueries {
             ");";
     static final String INSERT_JOB = "INSERT INTO jobs (name, jobType, content, status, executionMode, time, created, updated) " +
             "VALUES (:name, :jobType, :content, :status, :executionMode, :time, datetime('now'), datetime('now'))";
-    static final String UPDATE_STATUS = "UPDATE jobs SET status = :status WHERE id = :id";
+    static final String UPDATE_STATUS = "UPDATE jobs SET status = :status, updated = datetime('now') WHERE id = :id";
     static final String SELECT_JOB_BY_ID = "SELECT * FROM jobs WHERE id = :id";
     static final String SELECT_JOBS_BY_IDS = "SELECT * FROM jobs WHERE id in (:ids)";
     static final String DELETE_JOB = "DELETE FROM jobs WHERE id = :id";
