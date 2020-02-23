@@ -9,6 +9,5 @@ public enum ExecutionMode {
     EVERY_HOUR,
     EVERY_2_HOURS,
     EVERY_6_HOURS,
-    EVERY_12_HOURS,
-    CUSTOM
+    EVERY_12_HOURS
 }

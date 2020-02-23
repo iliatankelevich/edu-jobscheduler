@@ -1,7 +1,6 @@
 package edu.ilia.jobsystem.service;
 
 import edu.ilia.jobssystem.models.Job;
-import edu.ilia.jobssystem.models.JobServiceError;
 import edu.ilia.jobssystem.models.JobServiceResponse;
 import edu.ilia.jobsystem.service.dao.JobsDao;
 import edu.ilia.jobsystem.service.executers.JobExecutor;
@@ -11,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author ilia.tankelevich
@@ -30,6 +29,7 @@ public class JobHandler {
 
     private final JobsDao dao;
 
+    @Autowired
     public JobHandler(List<JobExecutor> executorsList, JobsDao dao) {
         if (executorsList != null){
             executors = executorsList.stream().collect(Collectors.toMap(JobExecutor::getName, jobExecutor -> jobExecutor));
