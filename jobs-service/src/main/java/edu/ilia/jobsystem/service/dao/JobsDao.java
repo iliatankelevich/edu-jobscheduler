@@ -12,10 +12,12 @@ import java.util.List;
  */
 public interface JobsDao {
     void initDB();
+
     Job insertJob(Job job);
+
     boolean updateJobStatus(int id, String started);
 
-    List<Integer> getJobIdsByExecutionMode(ExecutionMode every2Hours);
+    List<Integer> getJobIdsByExecutionModeAndStatus(ExecutionMode executionMode, String status);
 
     JobServiceResponse getJob(Integer jobId);
 

@@ -1,5 +1,6 @@
 package edu.ilia.jobsystem.service;
 
+import edu.ilia.jobssystem.models.ExecutionMode;
 import edu.ilia.jobssystem.models.Job;
 import edu.ilia.jobssystem.models.JobServiceResponse;
 import edu.ilia.jobsystem.service.dao.JobsDao;
@@ -67,9 +68,12 @@ public class JobHandler {
             if(errMsg != null){
                 log.error(errMsg);
                 throw new RuntimeException(errMsg);
+            }else if(job.getExecutionMode() == ExecutionMode.NOW){
+                    dao.updateJobStatus(job.getId(), "done");
+                    job.setStatus("done");
             }else{
-                dao.updateJobStatus(job.getId(), "done");
-                job.setStatus("done");
+                dao.updateJobStatus(job.getId(), "pending");
+                job.setStatus("pending");
             }
         }
 

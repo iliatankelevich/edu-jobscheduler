@@ -23,4 +23,5 @@ public class SqlQueries {
     static final String SELECT_JOB_BY_ID = "SELECT * FROM jobs WHERE id = :id";
     static final String SELECT_JOBS_BY_IDS = "SELECT * FROM jobs WHERE id in (:ids)";
     static final String DELETE_JOB = "DELETE FROM jobs WHERE id = :id";
+    static final String SELECT_JOBS_BY_EXECUTION_MODE_AND_STATUS = "SELECT id FROM jobs WHERE executionMode = :executionMode AND status = :status";
 }

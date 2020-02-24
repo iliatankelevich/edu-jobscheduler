@@ -16,6 +16,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -54,6 +55,7 @@ public class JobsJdbcDaoImpl implements JobsDao {
         }
     }
 
+    @Transactional
     @Override
     public Job insertJob(@NotNull(message = "job cannot be null") Job job) {
         SqlParameterSource parameters = new BeanPropertySqlParameterSource(job);
@@ -70,6 +72,7 @@ public class JobsJdbcDaoImpl implements JobsDao {
         return job;
     }
 
+    @Transactional
     @Override
     public boolean updateJobStatus(int id, String status) {
         SqlParameterSource parameters = new MapSqlParameterSource().addValue("id", id).addValue("status", status);
@@ -78,9 +81,17 @@ public class JobsJdbcDaoImpl implements JobsDao {
     }
 
     @Override
-    public List<Integer> getJobIdsByExecutionMode(ExecutionMode every2Hours) {
-        return null;
+    public List<Integer> getJobIdsByExecutionModeAndStatus(ExecutionMode executionMode, String status) {
+        List<Integer> result = new ArrayList<>();
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("executionMode", executionMode)
+                .addValue("status", status);
+        SqlRowSet sqlRowSet = jdbc.queryForRowSet(SELECT_JOBS_BY_EXECUTION_MODE_AND_STATUS, parameters);
+        while (sqlRowSet.next()){
+            result.add(sqlRowSet.getInt("id"));
+        }
 
+        return result;
     }
 
     @Override
@@ -98,6 +109,7 @@ public class JobsJdbcDaoImpl implements JobsDao {
         return response;
     }
 
+    @Transactional
     @Override
     public boolean deleteJob(int jobId) {
         SqlParameterSource parameters = new MapSqlParameterSource().addValue("id", jobId);

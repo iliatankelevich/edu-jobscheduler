@@ -55,7 +55,7 @@ public class Scheduler {
     }
 
     private void pushToQueueJobsByType(ExecutionMode executionMode){
-        List<Integer> jobIds = dao.getJobIdsByExecutionMode(executionMode);
+        List<Integer> jobIds = dao.getJobIdsByExecutionModeAndStatus(executionMode, "pending");
         queue.push(jobIds);
     }
 }
